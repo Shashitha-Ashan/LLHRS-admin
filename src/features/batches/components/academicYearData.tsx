@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import { useState, useEffect } from "react";
@@ -27,7 +28,6 @@ const AcademicYears = () => {
   useEffect(() => {
     const fetchYears = async () => {
       const years = await getYears();
-      // @ts-ignore
       setYears(years);
     };
     fetchYears();
@@ -36,7 +36,6 @@ const AcademicYears = () => {
     { field: "year", headerName: "Year", width: 90 },
     { field: "academicYear", headerName: "Name", width: 150 },
   ];
-  // @ts-ignore
   const handleRowSelection = (newSelection) => {
     setSelectedRows(newSelection);
   };
@@ -111,10 +110,8 @@ const AcademicYears = () => {
         rows={years}
         columns={columns}
         pageSize={5}
-        // @ts-ignore
         getRowId={(row) => row._id}
         pageSizeOptions={[5, 10]}
-        // @ts-ignore
         initialState={{ page: 0, pageSize: 5 }}
         checkboxSelection
         selectionModel={selectedRows}
