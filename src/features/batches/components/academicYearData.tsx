@@ -18,16 +18,19 @@ import {
 } from "../../../styles/buttonColors";
 import EditPopup from "./editPopup";
 import SystemUpdateAltIcon from "@mui/icons-material/SystemUpdateAlt";
+import LoadingIndicator from "../../../components/loading-indicator";
 
 const AcademicYears = () => {
   const [years, setYears] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [open, setOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchYears = async () => {
       const years = await getYears();
+      setLoading(false);
       setYears(years);
     };
     fetchYears();
@@ -56,6 +59,7 @@ const AcademicYears = () => {
       console.error("Error starting new academic year", error);
     }
   };
+  if (loading) return <LoadingIndicator />;
   return (
     <>
       {open && (

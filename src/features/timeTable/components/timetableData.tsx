@@ -11,14 +11,17 @@ import {
   newRecordButtonColor,
   editButtonColor,
 } from "../../../styles/buttonColors";
+import LoadingIndicator from "../../../components/loading-indicator";
 
 const TimeTableData = () => {
   const [timeSlots, setTimeSlots] = useState([]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchTimeSlots = async () => {
       const slots = await getAllTimeSlots();
       // @ts-ignore
+      setLoading(false);
       setTimeSlots(slots);
     };
     fetchTimeSlots();
@@ -89,6 +92,7 @@ const TimeTableData = () => {
     },
   ];
 
+  if (loading) return <LoadingIndicator />;
   return (
     <div style={{ height: "70vh", width: "100%" }}>
       <Button
