@@ -33,7 +33,6 @@ export default function CreateTimeSlotPage() {
     const fetchHalls = async () => {
       try {
         const hallData = await getAllHalls();
-        // @ts-ignore
         setHalls(hallData);
       } catch (error) {
         console.error("Error fetching halls", error);
@@ -42,7 +41,6 @@ export default function CreateTimeSlotPage() {
     const fetchModules = async () => {
       try {
         const moduleData = await getModules();
-        // @ts-ignore
         setModules(moduleData);
       } catch (error) {
         console.error("Error fetching modules", error);
@@ -157,9 +155,7 @@ export default function CreateTimeSlotPage() {
                 }}
               >
                 {lecturers.map((lecturerItem) => (
-                  // @ts-ignore
                   <MenuItem key={lecturerItem._id} value={lecturerItem._id}>
-                    // @ts-ignore
                     {lecturerItem.name}
                   </MenuItem>
                 ))}
@@ -203,9 +199,7 @@ export default function CreateTimeSlotPage() {
                 }}
               >
                 {modules.map((moduleItem) => (
-                  // @ts-ignore
                   <MenuItem key={moduleItem._id} value={moduleItem._id}>
-                    // @ts-ignore
                     {moduleItem.moduleCode}
                   </MenuItem>
                 ))}
