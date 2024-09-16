@@ -34,7 +34,7 @@ const createDepartment = async (data: unknown) => {
   return response;
 };
 
-export default {
+export {
   getDepartments,
   getYears,
   getFocusAreas,
