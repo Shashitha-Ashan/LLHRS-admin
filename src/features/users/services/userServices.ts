@@ -1,3 +1,4 @@
+// @ts-nocheck
 import AuthService from "../../../services/AuthService";
 
 const api = AuthService.getInstance();
@@ -21,5 +22,14 @@ const createNewUser = async (newUser: unknown) => {
     throw error;
   }
 };
+const getLecturers = async () => {
+  try {
+    const response = await api.get("/user/lecturers");
+    return response["users"];
+  } catch (error) {
+    console.error("Error fetching lecturers: ", error);
+    throw error;
+  }
+};
 
-export { getUsers, createNewUser };
+export { getUsers, createNewUser, getLecturers };

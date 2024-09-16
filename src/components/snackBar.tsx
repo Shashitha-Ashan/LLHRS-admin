@@ -1,9 +1,18 @@
-import * as React from "react";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
-export default function SimpleSnackbar({ open, onClose, bkgColor, note }) {
+export default function SimpleSnackbar({
+  open,
+  onClose,
+  bkgColor,
+  note,
+}: {
+  open: boolean;
+  onClose: () => void;
+  bkgColor: string;
+  note: string;
+}) {
   const action = (
     <IconButton
       size="small"

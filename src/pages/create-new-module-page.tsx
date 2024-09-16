@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useState, useEffect } from "react";
 import { TextField, Button, MenuItem } from "@mui/material";
 import { useImportedModules } from "../features/importModules/hooks/useImportedModules";

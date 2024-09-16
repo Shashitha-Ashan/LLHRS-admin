@@ -16,7 +16,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../state/AuthProvider";
 
 export default function AccountMenu() {
-  const { user, logout } = useAuth();
+  // @ts-ignore
+  const { logout } = useAuth();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();

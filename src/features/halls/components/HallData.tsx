@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { DataGrid } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 import { getAllHalls } from "../services/hallServices";

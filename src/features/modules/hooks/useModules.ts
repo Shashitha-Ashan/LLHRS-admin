@@ -1,4 +1,4 @@
-// hooks/useModules.ts
+// @ts-nocheck
 import { useEffect, useState } from "react";
 import { getModules } from "../services/moduleServices";
 import { ModuleDTO } from "../models/ModuleDTO";

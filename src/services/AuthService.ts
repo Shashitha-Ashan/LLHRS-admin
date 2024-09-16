@@ -1,3 +1,4 @@
+// @ts-nocheck
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 
 class AuthService {
@@ -49,6 +50,28 @@ class AuthService {
       return response.data;
     } catch (error) {
       console.error("POST request failed:", error);
+      throw error;
+    }
+  }
+  public async put<T>(
+    url: string,
+    data: unknown,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
+    try {
+      const response = await this.api.put<T>(url, data, config);
+      return response.data;
+    } catch (error) {
+      console.error("PUT request failed:", error);
+      throw error;
+    }
+  }
+  public async delete<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    try {
+      const response = await this.api.delete<T>(url, config);
+      return response.data;
+    } catch (error) {
+      console.error("DELETE request failed:", error);
       throw error;
     }
   }

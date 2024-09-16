@@ -11,6 +11,7 @@ import TimeSlotsPage from "../pages/time-slots-page";
 import BatchesPage from "../pages/batches-page";
 import HallPage from "../pages/hall-page";
 import CreateHallPage from "../pages/create-hall-page";
+import CreateTimeSlotPage from "../pages/create-timeSlot-page";
 
 const MainRoutes = () => {
   return (
@@ -95,6 +96,15 @@ const MainRoutes = () => {
           <ProtetedRoute>
             <NavBar />
             <CreateHallPage />
+          </ProtetedRoute>
+        }
+      />
+      <Route
+        path="/time-table/create-slot"
+        element={
+          <ProtetedRoute>
+            <NavBar />
+            <CreateTimeSlotPage />
           </ProtetedRoute>
         }
       />

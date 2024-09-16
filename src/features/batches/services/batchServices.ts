@@ -14,6 +14,14 @@ const getYears = async () => {
   const response = await api.get(`${BASE_URL_ACADEMICYEARS}`);
   return response;
 };
+const getYearById = async (id: string) => {
+  try {
+    const response = await api.get(`${BASE_URL_ACADEMICYEARS}/${id}`);
+    return response;
+  } catch (error) {
+    console.error("Error fetching year", error);
+  }
+};
 
 const getFocusAreas = async () => {
   const response = await api.get(`${BASE_URL_FOCUS_AREAS}`);
@@ -33,6 +41,21 @@ const createDepartment = async (data: unknown) => {
   const response = await api.post(`${BASE_URL_DEPARTMENT}`, data);
   return response;
 };
+const deleteBatches = async (data: unknown) => {
+  const response = await api.post(
+    `${BASE_URL_ACADEMICYEARS}/bulk-delete`,
+    data
+  );
+  return response;
+};
+const startNewAcademicYear = async () => {
+  try {
+    const response = await api.post(`${BASE_URL_ACADEMICYEARS}/start-new`, {});
+    return response;
+  } catch (error) {
+    console.error("Error starting new academic year", error);
+  }
+};
 
 export {
   getDepartments,
@@ -41,4 +64,7 @@ export {
   createBatch,
   createFocusArea,
   createDepartment,
+  deleteBatches,
+  getYearById,
+  startNewAcademicYear,
 };

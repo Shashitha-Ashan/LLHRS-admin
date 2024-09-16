@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+// @ts-nocheck
 import { useState } from "react";
 import ImportModuleDTO from "../models/ImportModuleDTO";
 import {

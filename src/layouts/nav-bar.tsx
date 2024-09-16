@@ -13,6 +13,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import GroupIcon from "@mui/icons-material/Group";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import BadgeIcon from "@mui/icons-material/Badge";
+import HistoryIcon from "@mui/icons-material/History";
 
 function NavBar() {
   const linkStyle = {
@@ -64,6 +65,13 @@ function NavBar() {
           <Link style={linkStyle} to={"/halls"}>
             <IconButton color="inherit" sx={Constants.navIconStyle}>
               <ApartmentIcon />
+            </IconButton>
+          </Link>
+        </Tooltip>
+        <Tooltip title="History" arrow>
+          <Link style={linkStyle} to={"/halls"}>
+            <IconButton color="inherit" sx={Constants.navIconStyle}>
+              <HistoryIcon />
             </IconButton>
           </Link>
         </Tooltip>

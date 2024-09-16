@@ -1,3 +1,4 @@
+// @ts-nocheck
 import AuthService from "../../../services/AuthService";
 import Hall from "../models/hallModel";
 

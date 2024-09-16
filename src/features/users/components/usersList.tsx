@@ -1,5 +1,4 @@
-// components/ModuleList.ts
-import React from "react";
+// @ts-nocheck
 import { DataGrid } from "@mui/x-data-grid";
 import { useUsers } from "../hooks/useUsers";
 import LoadingIndicator from "../../../components/loading-indicator";

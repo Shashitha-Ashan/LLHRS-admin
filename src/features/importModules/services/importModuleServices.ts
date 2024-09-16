@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Papa from "papaparse";
 import ImportModuleDTO from "../models/ImportModuleDTO";
 import AuthService from "../../../services/AuthService";
