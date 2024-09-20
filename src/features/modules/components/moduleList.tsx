@@ -29,6 +29,12 @@ const ModuleList = () => {
         checkboxSelection
         pageSizeOptions={[5, 10]}
         initialState={{ page: 0, pageSize: 5 }}
+        getRowClassName={(params) => {
+          if (params.row.semester !== null) {
+            return `sem-${params.row.semester}-row`;
+          }
+          return "";
+        }}
       />
     </div>
   );

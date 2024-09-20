@@ -32,6 +32,12 @@ const FocusAreas = () => {
       initialState={{ page: 0, pageSize: 5 }}
       hideFooterSelectedRowCount={true}
       loading={halls.length === 0}
+      getRowClassName={(params) => {
+        if (params.row.department != null) {
+          return `department-${params.row.department}-row`;
+        }
+        return "";
+      }}
     />
   );
 };

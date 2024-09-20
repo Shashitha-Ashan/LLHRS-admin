@@ -1,13 +1,69 @@
 .cancelled-row {
-    color: #d32f2f;
-    background-color: #fce4ec;
+  color: #d32f2f;
+  background-color: #fce4ec;
 }
 
 .rescheduled-row {
-    color: #388e3c;
-    background-color: #e8f5e9;
+  color: #388e3c;
+  background-color: #e8f5e9;
 }
 .extra-row {
-    color: #d29819;
-    background-color: #fdf1e3;
+  color: #d29819;
+  background-color: #fdf1e3;
+}
+.sem-1-row {
+  color: #d21951;
+  background-color: #fde3f1;
+}
+.sem-2-row {
+  color: #d21951;
+  background-color: #fde3f1;
+}
+.sem-3-row {
+  color: #388e3c;
+  background-color: #e8f5e9;
+}
+.sem-4-row {
+  color: #388e3c;
+  background-color: #e8f5e9;
+}
+.sem-5-row {
+  color: #1976d2;
+  background-color: #e3f2fd;
+}
+.sem-6-row {
+  color: #1976d2;
+  background-color: #e3f2fd;
+}
+.sem-7-row {
+  color: #d29819;
+  background-color: #fdf1e3;
+}
+.sem-8-row {
+  color: #d29819;
+  background-color: #fdf1e3;
+}
+.lecturer-row {
+  color: #d21951;
+  background-color: #fde3f1;
+}
+.department-ict-row {
+  color: #d32f2f;
+  background-color: #fce4ec;
+}
+.department-bst-row {
+  color: #388e3c;
+  background-color: #e8f5e9;
+}
+.department-egt-row {
+  color: #d29819;
+  background-color: #fdf1e3;
+}
+.hall-lab-row {
+  color: #1976d2;
+  background-color: #e3f2fd;
+}
+.hall-lecture-row {
+  color: #d21951;
+  background-color: #fde3f1;
 }

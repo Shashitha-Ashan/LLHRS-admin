@@ -26,6 +26,12 @@ const Departments = () => {
       getRowId={(row) => row._id}
       pageSizeOptions={[5, 10]}
       initialState={{ page: 0, pageSize: 5 }}
+      getRowClassName={(params) => {
+        if (params.row.name != null) {
+          return `department-${params.row.name}-row`;
+        }
+        return "";
+      }}
     />
   );
 };

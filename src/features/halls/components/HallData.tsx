@@ -32,6 +32,12 @@ const HallData = () => {
       rowsPerPageOptions={[5, 10, 20]}
       pageSizeOptions={[5, 10]}
       initialState={{ page: 0, pageSize: 5 }}
+      getRowClassName={(params) => {
+        if (params.row.hallType != null) {
+          return `hall-${params.row.hallType}-row`;
+        }
+        return "";
+      }}
     />
   );
 };
