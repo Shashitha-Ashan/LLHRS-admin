@@ -1,0 +1,13 @@
+.cancelled-row {
+    color: #d32f2f;
+    background-color: #fce4ec;
+}
+
+.rescheduled-row {
+    color: #388e3c;
+    background-color: #e8f5e9;
+}
+.extra-row {
+    color: #d29819;
+    background-color: #fdf1e3;
+}

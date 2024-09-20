@@ -99,7 +99,7 @@ const TimeTableData = () => {
     },
     {
       field: "slot_type",
-      headerName: "Slot Type",
+      headerName: "Time Slot Type",
       width: 150,
     },
     {
@@ -147,6 +147,16 @@ const TimeTableData = () => {
                 columns={columns}
                 getRowId={(row) => row._id}
                 pageSizeOptions={[5, 10]}
+                getRowClassName={(params) => {
+                  if (params.row.slot_type === "cancelled") {
+                    return "cancelled-row";
+                  } else if (params.row.slot_type === "reschaduled") {
+                    return "rescheduled-row";
+                  } else if (params.row.slot_type === "extra") {
+                    return "extra-row";
+                  }
+                  return "";
+                }}
               />
             </div>
           </AccordionDetails>
