@@ -1,5 +1,4 @@
-// @ts-ignore
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 import { getAllTimeSlots } from "../services/timeTableServices";
 import {
@@ -19,14 +18,27 @@ import {
 } from "../../../styles/buttonColors";
 import LoadingIndicator from "../../../components/loading-indicator";
 
+// Define a type for the time slot data
+interface TimeSlot {
+  _id: string;
+  date: string;
+  start_time: string;
+  end_time: string;
+  lecturer: { name: string };
+  hall: { hallName: string };
+  module: { moduleName: string };
+  slot_type: string;
+  sessionType: string;
+}
+
 const TimeTableData = () => {
-  const [timeSlots, setTimeSlots] = useState([]);
+  const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTimeSlots = async () => {
-      const slots = await getAllTimeSlots();
+      const slots: TimeSlot[] = (await getAllTimeSlots()) || [];
       setLoading(false);
       setTimeSlots(slots);
     };
@@ -42,45 +54,52 @@ const TimeTableData = () => {
   };
 
   // Group time slots by module name
-  const groupedTimeSlots = timeSlots.reduce((acc, slot) => {
-    const moduleName = slot.module?.moduleName || "Unknown Module"; // Handle case where module might be missing
-    if (!acc[moduleName]) acc[moduleName] = [];
-    acc[moduleName].push(slot);
-    return acc;
-  }, {});
+  const groupedTimeSlots = timeSlots.reduce<Record<string, TimeSlot[]>>(
+    (acc, slot) => {
+      const moduleName = slot.module?.moduleName || "Unknown Module"; // Handle case where module might be missing
+      if (!acc[moduleName]) acc[moduleName] = [];
+      acc[moduleName].push(slot);
+      return acc;
+    },
+    {}
+  );
 
   // Columns for the DataGrid
-  const columns = [
+  const columns: GridColDef[] = [
     { field: "date", headerName: "Date", width: 150 },
     {
       field: "start_time",
       headerName: "Start Time",
       width: 150,
-      valueGetter: (value) => (value ? splitTime(value) : "N/A"),
+      valueGetter: (params: any) => splitTime(params.row.start_time),
     },
+
     {
       field: "end_time",
       headerName: "End Time",
       width: 150,
-      valueGetter: (value) => (value ? splitTime(value) : "N/A"),
+      valueGetter: (params: any) => splitTime(params.row.end_time as string),
     },
     {
       field: "lecturer",
       headerName: "Lecturer",
       width: 150,
-      valueGetter: (value) => (value ? value.name : "N/A"),
+      valueGetter: (params: any) =>
+        params.row.lecturer ? params.row.lecturer.name : "N/A",
     },
     {
       field: "hall",
       headerName: "Hall",
       width: 150,
-      valueGetter: (value) => (value ? value.hallName : "N/A"),
+      valueGetter: (params: any) =>
+        params.row.hall ? params.row.hall.hallName : "N/A",
     },
     {
       field: "module",
       headerName: "Module",
       width: 250,
-      valueGetter: (value) => (value ? value.moduleName : "N/A"),
+      valueGetter: (params: any) =>
+        params.row.module ? params.row.module.moduleName : "N/A",
     },
     {
       field: "slot_type",
@@ -130,11 +149,7 @@ const TimeTableData = () => {
               <DataGrid
                 rows={groupedTimeSlots[moduleName]}
                 columns={columns}
-                pageSize={5}
                 getRowId={(row) => row._id}
-                rowsPerPageOptions={[5, 10, 20]}
-                pageSizeOptions={[5, 10]}
-                initialState={{ page: 0, pageSize: 5 }}
               />
             </div>
           </AccordionDetails>
