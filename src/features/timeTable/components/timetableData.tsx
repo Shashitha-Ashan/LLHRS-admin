@@ -1,4 +1,5 @@
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+// @ts-ignore
+import { DataGrid } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 import { getAllTimeSlots } from "../services/timeTableServices";
 import {
@@ -18,7 +19,6 @@ import {
 } from "../../../styles/buttonColors";
 import LoadingIndicator from "../../../components/loading-indicator";
 
-// Define a type for the time slot data
 interface TimeSlot {
   _id: string;
   date: string;
@@ -38,7 +38,7 @@ const TimeTableData = () => {
 
   useEffect(() => {
     const fetchTimeSlots = async () => {
-      const slots: TimeSlot[] = (await getAllTimeSlots()) || [];
+      const slots: TimeSlot[] = (await getAllTimeSlots()) as TimeSlot[];
       setLoading(false);
       setTimeSlots(slots);
     };
@@ -65,41 +65,37 @@ const TimeTableData = () => {
   );
 
   // Columns for the DataGrid
-  const columns: GridColDef[] = [
+  const columns = [
     { field: "date", headerName: "Date", width: 150 },
     {
       field: "start_time",
       headerName: "Start Time",
       width: 150,
-      valueGetter: (params: any) => splitTime(params.row.start_time),
+      valueGetter: (value: any) => (value ? splitTime(value) : "N/A"),
     },
-
     {
       field: "end_time",
       headerName: "End Time",
       width: 150,
-      valueGetter: (params: any) => splitTime(params.row.end_time as string),
+      valueGetter: (value: any) => (value ? splitTime(value) : "N/A"),
     },
     {
       field: "lecturer",
       headerName: "Lecturer",
       width: 150,
-      valueGetter: (params: any) =>
-        params.row.lecturer ? params.row.lecturer.name : "N/A",
+      valueGetter: (value: any) => (value ? value.name : "N/A"),
     },
     {
       field: "hall",
       headerName: "Hall",
       width: 150,
-      valueGetter: (params: any) =>
-        params.row.hall ? params.row.hall.hallName : "N/A",
+      valueGetter: (value: any) => (value ? value.hallName : "N/A"),
     },
     {
       field: "module",
       headerName: "Module",
       width: 250,
-      valueGetter: (params: any) =>
-        params.row.module ? params.row.module.moduleName : "N/A",
+      valueGetter: (value: any) => (value ? value.moduleName : "N/A"),
     },
     {
       field: "slot_type",
@@ -150,6 +146,7 @@ const TimeTableData = () => {
                 rows={groupedTimeSlots[moduleName]}
                 columns={columns}
                 getRowId={(row) => row._id}
+                pageSizeOptions={[5, 10]}
               />
             </div>
           </AccordionDetails>
