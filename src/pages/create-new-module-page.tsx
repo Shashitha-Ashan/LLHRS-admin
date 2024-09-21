@@ -59,7 +59,7 @@ const CreateNewModulePage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // createNewModule(module);
+    createNewModule(module);
     console.log(module);
   };
 
