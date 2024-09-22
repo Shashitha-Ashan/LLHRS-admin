@@ -4,7 +4,7 @@ import ImportModuleDTO from "../models/ImportModuleDTO";
 import AuthService from "../../../services/AuthService";
 
 const api = AuthService.getInstance();
-const BASE_URL = "/modules/";
+const BASE_URL = "modules/";
 
 const importModules = (file: File): Promise<unknown> => {
   return new Promise((resolve, reject) => {
@@ -27,6 +27,7 @@ const createModule = async (
   module: ImportModuleDTO
 ): Promise<ImportModuleDTO> => {
   try {
+    console.log("module", module);
     const response = await api.post<ImportModuleDTO>(BASE_URL, module);
     return response;
   } catch (error) {
@@ -57,4 +58,19 @@ const fetchDepartments = async () => {
     throw error;
   }
 };
-export { importModules, addBulkModules, createModule, fetchDepartments };
+const getFocusAreaByDepartment = async (department: string) => {
+  try {
+    const response = await api.get(`focus-area/${department}`);
+    return response;
+  } catch (error) {
+    console.error("Error fetching focus areas:", error);
+    throw error;
+  }
+};
+export {
+  importModules,
+  addBulkModules,
+  createModule,
+  fetchDepartments,
+  getFocusAreaByDepartment,
+};

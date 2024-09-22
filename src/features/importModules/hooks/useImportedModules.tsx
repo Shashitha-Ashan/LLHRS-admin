@@ -7,6 +7,7 @@ import {
   addBulkModules,
   createModule,
   fetchDepartments,
+  getFocusAreaByDepartment,
 } from "../services/importModuleServices";
 
 export const useImportedModules = (csvFile: File | null) => {
@@ -57,6 +58,17 @@ export const useImportedModules = (csvFile: File | null) => {
       setLoading(false);
     }
   };
+  const getFocusAreaByDepartment = async (department: string) => {
+    setLoading(true);
+    try {
+      const data = await getFocusAreaByDepartment(department);
+      return data;
+    } catch (err) {
+      setError("Failed to load focus areas");
+    } finally {
+      setLoading(false);
+    }
+  };
   return {
     modules,
     loading,
@@ -66,5 +78,6 @@ export const useImportedModules = (csvFile: File | null) => {
     createModules,
     createNewModule,
     getDepartments,
+    getFocusAreaByDepartment,
   };
 };

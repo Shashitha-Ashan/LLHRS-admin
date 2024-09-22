@@ -1,9 +1,18 @@
 // @ts-nocheck
 
 import { useState, useEffect } from "react";
-import { TextField, Button, MenuItem } from "@mui/material";
+import {
+  TextField,
+  Button,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
 import { useImportedModules } from "../features/importModules/hooks/useImportedModules";
 import Select from "@mui/material/Select";
+import ImportModuleDTO from "../features/importModules/models/ImportModuleDTO";
+import { getFocusAreaByDepartment } from "../features/importModules/services/importModuleServices";
+import SimpleSnackbar from "../components/snackBar";
 
 interface Module {
   _id: string;
@@ -19,17 +28,21 @@ const CreateNewModulePage = () => {
   const { createNewModule, getDepartments } = useImportedModules(null);
   const [department, setDepartment] = useState("");
   const [departments, setDepartments] = useState([]);
+  const [focusArea, setFocusArea] = useState("");
+  const [focusAreas, setFocusAreas] = useState([]);
+  const [open, setOpen] = useState(false);
 
   const textFieldStyle = {
     width: "50vw",
   };
-  const [module, setModule] = useState<Module>({
+  const [module, setModule] = useState<ImportModuleDTO>({
     moduleCode: "",
     moduleName: "",
     semester: "",
     academicYear: "",
     department: "",
     NOHours: 0,
+    focusArea: "",
   });
 
   useEffect(() => {
@@ -38,15 +51,29 @@ const CreateNewModulePage = () => {
       setDepartments(data);
     };
     getDepartmentsData();
+    getFocusArea("all");
   }, []);
 
-  const handleChange = (event) => {
-    console.log(event.target.value);
+  const handleFocusAreaChange = async (event) => {
+    setFocusArea(event.target.value);
+    setModule((prevModule) => ({
+      ...prevModule,
+      focusArea: event.target.value._id,
+    }));
+  };
+
+  const getFocusArea = async (department) => {
+    const data = await getFocusAreaByDepartment(department);
+    setFocusAreas(data);
+  };
+
+  const handleChange = async (event) => {
     setDepartment(event.target.value);
     setModule((prevModule) => ({
       ...prevModule,
       department: event.target.value._id,
     }));
+    getFocusArea(event.target.value._id);
   };
 
   const handleInputChange = (event) => {
@@ -60,7 +87,19 @@ const CreateNewModulePage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     createNewModule(module);
-    console.log(module);
+    clearTextFields();
+    setOpen(true);
+  };
+  const clearTextFields = () => {
+    setModule({
+      moduleCode: "",
+      moduleName: "",
+      semester: "",
+      academicYear: "",
+      department: "",
+      NOHours: 0,
+      focusArea: "",
+    });
   };
 
   return (
@@ -73,6 +112,12 @@ const CreateNewModulePage = () => {
         height: "70vh",
       }}
     >
+      <SimpleSnackbar
+        open={open}
+        onClose={() => setOpen(false)}
+        bkgColor="green"
+        note="Module created successfully"
+      />
       <h1 style={{ marginTop: "50px" }}>Create New Module</h1>
       <form
         onSubmit={handleSubmit}
@@ -107,21 +152,44 @@ const CreateNewModulePage = () => {
           />
         </div>
         <div>
-          <Select
-            labelId="department-label"
-            id="demo-simple-select"
-            value={department}
-            label="Department"
-            onChange={handleChange}
-            sx={textFieldStyle}
-            required
-          >
-            {departments.map((department) => (
-              <MenuItem key={department.name} value={department}>
-                {department.name.toUpperCase()}
-              </MenuItem>
-            ))}
-          </Select>
+          <FormControl>
+            <InputLabel>Department</InputLabel>
+            <Select
+              labelId="department-label"
+              id="demo-simple-select"
+              value={department}
+              label="Department"
+              onChange={handleChange}
+              sx={textFieldStyle}
+              required
+            >
+              {departments.map((department) => (
+                <MenuItem key={department.name} value={department}>
+                  {department.name.toUpperCase()}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+        <div>
+          <FormControl>
+            <InputLabel>Focus Area</InputLabel>
+            <Select
+              labelId="focusArea-label"
+              id="demo-simple-select"
+              value={focusArea}
+              label="Focus Area"
+              onChange={handleFocusAreaChange}
+              sx={textFieldStyle}
+              required
+            >
+              {focusAreas.map((focusArea) => (
+                <MenuItem key={focusArea.name} value={focusArea}>
+                  {focusArea.name.toUpperCase()}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
 
         <div>

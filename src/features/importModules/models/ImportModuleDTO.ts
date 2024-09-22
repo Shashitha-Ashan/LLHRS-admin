@@ -4,6 +4,7 @@ interface ImportModuleDTO {
   semester: string;
   academicYear: string;
   NOHours: number;
+  department: string;
 }
 
 export default ImportModuleDTO;
