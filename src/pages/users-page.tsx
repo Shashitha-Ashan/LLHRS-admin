@@ -1,4 +1,4 @@
-import { Typography, Paper, Button } from "@mui/material";
+import { Typography, Paper } from "@mui/material";
 
 import UserList from "../features/users/components/usersList";
 const UsersPage = () => {
