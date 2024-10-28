@@ -7,6 +7,8 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  ListItemText,
+  Checkbox,
 } from "@mui/material";
 import { useImportedModules } from "../features/importModules/hooks/useImportedModules";
 import Select from "@mui/material/Select";
@@ -28,7 +30,8 @@ const CreateNewModulePage = () => {
   const { createNewModule, getDepartments } = useImportedModules(null);
   const [department, setDepartment] = useState("");
   const [departments, setDepartments] = useState([]);
-  const [focusArea, setFocusArea] = useState("");
+  const [selectedFocusArea, setSelectedFocusArea] = useState<string[]>([]);
+  const [selectedFocusAreaID, setSelectedFocusAreaID] = useState<string[]>([]);
   const [focusAreas, setFocusAreas] = useState([]);
   const [open, setOpen] = useState(false);
 
@@ -42,7 +45,7 @@ const CreateNewModulePage = () => {
     academicYear: "",
     department: "",
     NOHours: 0,
-    focusArea: "",
+    focusArea: [],
   });
 
   useEffect(() => {
@@ -55,13 +58,29 @@ const CreateNewModulePage = () => {
   }, []);
 
   const handleFocusAreaChange = async (event) => {
-    setFocusArea(event.target.value);
+    const newFocusArea = event.target.value.name.toUpperCase() as string;
+    const newFocusAreaID = event.target.value._id as string;
+    setSelectedFocusArea((prevFocusArea) => {
+      if (prevFocusArea.includes(newFocusArea)) {
+        return prevFocusArea.filter((focusArea) => focusArea !== newFocusArea);
+      } else {
+        return [...prevFocusArea, newFocusArea];
+      }
+    });
+    setSelectedFocusAreaID((prevFocusArea) => {
+      if (prevFocusArea.includes(newFocusAreaID)) {
+        return prevFocusArea.filter(
+          (focusArea) => focusArea !== newFocusAreaID
+        );
+      } else {
+        return [...prevFocusArea, newFocusAreaID];
+      }
+    });
     setModule((prevModule) => ({
       ...prevModule,
-      focusArea: event.target.value._id,
+      focusArea: selectedFocusAreaID,
     }));
   };
-
   const getFocusArea = async (department) => {
     const data = await getFocusAreaByDepartment(department);
     setFocusAreas(data);
@@ -98,7 +117,7 @@ const CreateNewModulePage = () => {
       academicYear: "",
       department: "",
       NOHours: 0,
-      focusArea: "",
+      focusArea: [],
     });
   };
 
@@ -177,15 +196,21 @@ const CreateNewModulePage = () => {
             <Select
               labelId="focusArea-label"
               id="demo-simple-select"
-              value={focusArea}
+              value={selectedFocusArea}
               label="Focus Area"
               onChange={handleFocusAreaChange}
               sx={textFieldStyle}
               required
+              renderValue={(selected) => selected.join(", ")}
             >
               {focusAreas.map((focusArea) => (
                 <MenuItem key={focusArea.name} value={focusArea}>
-                  {focusArea.name.toUpperCase()}
+                  <Checkbox
+                    checked={selectedFocusArea.includes(
+                      focusArea.name.toUpperCase()
+                    )}
+                  />
+                  <ListItemText primary={focusArea.name.toUpperCase()} />
                 </MenuItem>
               ))}
             </Select>

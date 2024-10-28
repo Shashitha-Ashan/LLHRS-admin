@@ -5,6 +5,7 @@ interface ImportModuleDTO {
   academicYear: string;
   NOHours: number;
   department: string;
+  focusArea: string[];
 }
 
 export default ImportModuleDTO;
