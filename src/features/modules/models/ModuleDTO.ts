@@ -4,7 +4,6 @@ export interface ModuleDTO {
   moduleCode: string;
   moduleName: string;
   semester: string;
-  academicYear: string;
+  year: string;
   NOHours: number;
-  __v: number;
 }

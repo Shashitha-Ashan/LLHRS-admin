@@ -36,6 +36,14 @@ export default function HallPage() {
         >
           New Hall
         </Button>
+        <Button
+          variant="contained"
+          sx={{ backgroundColor: "##4FADFA", marginLeft: "10px" }}
+          startIcon={<DomainAddIcon />}
+          onClick={() => navigate("/halls/import-halls")}
+        >
+          Import Halls
+        </Button>
       </div>
       <Paper sx={{ height: "70vh", width: "100%" }}>
         <HallData />

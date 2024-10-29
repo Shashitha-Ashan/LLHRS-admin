@@ -1,8 +1,7 @@
 import { Paper, Typography } from "@mui/material";
+import AdminUserList from "../features/admin/components/adminUserList";
 
-import ModuleList from "../features/modules/components/moduleList";
-
-const ModulesPage = () => {
+export default function AddAdminPage() {
   return (
     <div>
       <Typography
@@ -15,13 +14,19 @@ const ModulesPage = () => {
           marginTop: "10px",
         }}
       >
-        Modules
+        Add Admin
       </Typography>
-
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
+          marginBottom: "20px",
+        }}
+      ></div>
       <Paper sx={{ height: "70vh", width: "100%" }}>
-        <ModuleList />
+        <AdminUserList />
       </Paper>
     </div>
   );
-};
-export default ModulesPage;
+}

@@ -158,6 +158,7 @@ export default function LoginPage() {
             variant="outlined"
             color="info"
             size="small"
+            id="login-button"
             disableElevation
             fullWidth
             sx={{ my: 2 }}

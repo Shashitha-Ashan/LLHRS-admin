@@ -13,6 +13,7 @@ import {
   ListItemIcon,
   ListItemText,
   ListItemButton,
+  Badge,
 } from "@mui/material";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -23,6 +24,8 @@ import BadgeIcon from "@mui/icons-material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import Home from "@mui/icons-material/Home";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import NotificationMenu from "../features/notifications/components/notificationMenu";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -90,6 +93,15 @@ function NavBar() {
           </ListItemButton>
         </ListItem>
         <Divider />
+        <ListItem key="send-notifications" disablePadding>
+          <ListItemButton onClick={() => navigate("/send-notification")}>
+            <ListItemIcon>
+              <NotificationsIcon sx={btnStyle} />
+              <ListItemText primary="Send Notifications" />
+            </ListItemIcon>
+          </ListItemButton>
+        </ListItem>
+        <Divider />
         {/* <ListItem key="History" disablePadding>
           <ListItemButton onClick={() => navigate("/history")}>
             <ListItemIcon>
@@ -106,7 +118,7 @@ function NavBar() {
   return (
     <AppBar
       position="static"
-      sx={{ backgroundColor: "#4CAF50", margin: 0, padding: 0 }}
+      sx={{ backgroundColor: "#CC8A00", margin: 0, padding: 0 }}
     >
       <Toolbar>
         <IconButton color="inherit" onClick={toggleDrawer(true)}>
@@ -118,10 +130,10 @@ function NavBar() {
           sx={{ flexGrow: 1, ml: "20px" }}
         >
           <Link to={"/"} style={{ textDecoration: "none", color: "inherit" }}>
-            Reserv
+            BookLab
           </Link>
         </Typography>
-
+        <NotificationMenu />
         <AccountMenu />
       </Toolbar>
       <div>

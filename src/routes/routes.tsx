@@ -12,6 +12,10 @@ import BatchesPage from "../pages/batches-page";
 import HallPage from "../pages/hall-page";
 import CreateHallPage from "../pages/create-hall-page";
 import CreateTimeSlotPage from "../pages/create-timeSlot-page";
+import ImportHalls from "../pages/import-halls";
+import NotificationsPage from "../pages/notifications-page";
+import AddAdminPage from "../pages/admin-page";
+import SendNotificationPage from "../pages/send-notification-page";
 
 const MainRoutes = () => {
   return (
@@ -105,6 +109,42 @@ const MainRoutes = () => {
           <ProtetedRoute>
             <NavBar />
             <CreateTimeSlotPage />
+          </ProtetedRoute>
+        }
+      />
+      <Route
+        path="/notifications"
+        element={
+          <ProtetedRoute>
+            <NavBar />
+            <NotificationsPage />
+          </ProtetedRoute>
+        }
+      />
+      <Route
+        path="/halls/import-halls"
+        element={
+          <ProtetedRoute>
+            <NavBar />
+            <ImportHalls />
+          </ProtetedRoute>
+        }
+      />
+      <Route
+        path="/admins"
+        element={
+          <ProtetedRoute>
+            <NavBar />
+            <AddAdminPage />
+          </ProtetedRoute>
+        }
+      />
+      <Route
+        path="/send-notification"
+        element={
+          <ProtetedRoute>
+            <NavBar />
+            <SendNotificationPage />
           </ProtetedRoute>
         }
       />

@@ -99,6 +99,7 @@ export default function CreateHallPage() {
           id="outlined-basic"
           label="Hall Name"
           variant="outlined"
+          name="hallName"
           sx={textFieldStyle}
           value={hallName}
           onChange={handleHallNameChange}
@@ -108,6 +109,7 @@ export default function CreateHallPage() {
           id="outlined-basic"
           label="Capacity"
           variant="outlined"
+          name="capacity"
           sx={textFieldStyle}
           onChange={handleCapacityChange}
           type="number"
@@ -118,6 +120,7 @@ export default function CreateHallPage() {
           <InputLabel id="hall-type-label">Hall Type</InputLabel>
           <Select
             value={type}
+            name="hallType"
             onChange={handleTypeChange}
             sx={{
               marginTop: "10px",
@@ -136,6 +139,7 @@ export default function CreateHallPage() {
         <br />
         <Button
           variant="contained"
+          id="create-hall"
           sx={{ backgroundColor: "#4CAF50", width: "50vw", margin: "10px" }}
           onClick={() => {
             createNewHall();

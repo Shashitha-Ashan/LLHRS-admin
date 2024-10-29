@@ -24,3 +24,15 @@ export const getModuleById = async (id: string): Promise<ModuleDTO> => {
     throw error;
   }
 };
+export const updateModule = async (module: ModuleDTO): Promise<ModuleDTO> => {
+  try {
+    const response = await api.put<ModuleDTO>(
+      `${BASE_URL}/${module._id}`,
+      module
+    );
+    return response;
+  } catch (error) {
+    console.error("Error updating module:", error);
+    throw error;
+  }
+};

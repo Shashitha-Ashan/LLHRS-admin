@@ -177,6 +177,7 @@ const CreateNewModulePage = () => {
               labelId="department-label"
               id="demo-simple-select"
               value={department}
+              name="department"
               label="Department"
               onChange={handleChange}
               sx={textFieldStyle}
@@ -197,6 +198,7 @@ const CreateNewModulePage = () => {
               labelId="focusArea-label"
               id="demo-simple-select"
               value={selectedFocusArea}
+              name="focusArea"
               label="Focus Area"
               onChange={handleFocusAreaChange}
               sx={textFieldStyle}
@@ -247,7 +249,7 @@ const CreateNewModulePage = () => {
           <TextField
             label="Number of Hours"
             id="NOHours"
-            name="NOHours"
+            name="hours"
             type="number"
             value={module.NOHours}
             onChange={handleInputChange}
