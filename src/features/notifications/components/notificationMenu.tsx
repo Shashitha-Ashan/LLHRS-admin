@@ -5,7 +5,6 @@ import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import { Divider } from "@mui/material";
-import NotificationComponent from "./notificationComponent";
 import { useNavigate } from "react-router-dom";
 
 export default function NotificationMenu() {

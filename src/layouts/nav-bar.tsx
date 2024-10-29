@@ -13,7 +13,6 @@ import {
   ListItemIcon,
   ListItemText,
   ListItemButton,
-  Badge,
 } from "@mui/material";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
